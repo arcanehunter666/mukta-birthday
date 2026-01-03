@@ -1,7 +1,8 @@
+
 name: Deploy to GitHub Pages
 on:
   push:
-    branches: ["main"] # This matches your 'main' branch in the screenshot
+    branches: ["main"]
 permissions:
   contents: read
   pages: write
@@ -16,7 +17,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # I removed the 'cache: npm' line that caused the error!
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -24,7 +25,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # Vite puts the finished files here
+          path: ./dist
   deploy:
     environment:
       name: github-pages
